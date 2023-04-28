@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyToDo - Edit</title>
 
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
@@ -39,21 +40,22 @@
     </header>
 
     <!-- content section -->
-    <div class="container col-lg-6 my-3 border mx-auto">
+    <div class="container col-lg-6 my-3 border mx-auto" id="edit">
         <form>
             <div class="form-group">
                 <label for="task">Task</label>
                 <input type="text" class="form-control" id="task" name="task" placeholder="Enter your task here"
-                    value=" Beispielseite mit dem Bootstrap Framework anlegen">
+                    :value="this.task_description">
+                
             </div>
             <div class=" form-group">
                 <label for="deadline">Deadline</label>
                 <input type="text" class="form-control" id="deadline" name="deadline" placeholder="dd/mm/yyyy"
-                    value="03/05/2023">
+                    :value="task_deadline">
             </div>
             <div class="form-group">
                 <label for="percent">%</label>
-                <input type="text" pattern="[0-9]+%" class="form-control" id="percent" name="percent" value="20%"
+                <input type="text" pattern="[0-9]+%" class="form-control" id="percent" name="percent" :value="task_percentage"
                     placeholder="XX%">
             </div>
 
@@ -81,5 +83,20 @@
         crossorigin="anonymous"></script>
 
 </body>
+
+
+<script>
+
+new Vue({
+        el:"#edit",
+        data:{
+            task_description: localStorage.getItem("task-description"),
+            task_deadline: localStorage.getItem("task-deadline"),
+            task_percentage: localStorage.getItem("task-percentage")
+        },
+
+       
+    })
+</script>
 
 </html>
