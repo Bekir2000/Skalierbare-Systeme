@@ -63,7 +63,7 @@
                 <a class="btn btn-primary" href="./edit.html" role="button" @click="getEdit(task)">Edit</a>
             </div>
             <div class="btn-group m-1" role="group" aria-label="Second group">
-                <button class="btn btn-danger" type="delete">X</button>
+                <button class="btn btn-danger" type="delete" @click="deleteButton(task)">X</button>
             </div>
         </div>
     </div>
@@ -134,7 +134,34 @@
                 localStorage.setItem("task-percentage",task.percentage)
 
                 
-            }
+            },
+
+            deleteButton: function(task){
+
+                
+                console.log("delete button")
+                console.log(task.id)
+                fetch("/deleteButton",{
+                    method:"DELETE",
+                    headers: {
+                    "Accept" : "application/json, text/plain, */*",
+                    "Content-type" : "application/json"
+                },
+                    body: JSON.stringify(task)
+                })
+                .then(response=>{
+                    if(response.status == 200){
+
+                        this.results = this.results.filter(item => item.id != task.id)
+                    }
+                })
+
+                
+            },
+
+            
+                
+            
             
         }
     })

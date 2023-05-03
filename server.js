@@ -5,16 +5,18 @@ var path = require("path");
 var app = express();
 
 
-const PORT = 8002;
+const PORT = 8004;
 
 let db = [   
     {
+        id: 0,
         description:"Beispielseite mit dem Bootstrap Framework anlegen",
         deadline:"03/05/2023",
         percentage:20
 
     },
     {
+        id: 1,
         description:"Irgendwas machen",
         deadline:"04/03/2022",
         percentage:50
@@ -30,9 +32,16 @@ app.post("/newtodo.html",(req,res)=>{
     
     console.log("new todo")
     console.log(req.body)
-    var task = req.body;
+    let task = req.body;
 
     if(task.description && task.deadline && task.percentage){
+
+        if(db.length != 0){
+            task.id = db.slice(-1)[0].id + 1
+        }else{
+            task.id = 0
+        }
+
         db.push(task)
     }
     
@@ -42,6 +51,20 @@ app.get("/getTasks",(req,res)=>{
     
     
     res.status(200).json(db)
+})
+
+app.delete("/deleteButton", (req, res)=>{
+    
+
+    console.log("delete")
+    console.log()
+
+    let task = req.body
+    console.log(`given ${task.id}`)
+    db = db.filter(item => item.id != task.id)
+    console.log(db)
+    
+    res.sendStatus(200)
 })
 
 
