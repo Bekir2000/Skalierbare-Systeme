@@ -30,9 +30,10 @@ app.use(express.urlencoded({extended:false}));
 
 app.post("/newtodo.html",(req,res)=>{
     
-    console.log("new todo")
-    console.log(req.body)
+    
     let task = req.body;
+    console.log('created: ')
+    console.log(task)
 
     if(task.description && task.deadline && task.percentage){
 
@@ -56,13 +57,11 @@ app.get("/getTasks",(req,res)=>{
 app.delete("/deleteButton", (req, res)=>{
     
 
-    console.log("delete")
-    console.log()
-
     let task = req.body
-    console.log(`given ${task.id}`)
     db = db.filter(item => item.id != task.id)
-    console.log(db)
+
+    console.log("deleted: ")
+    console.log(task)
     
     res.sendStatus(200)
 })
