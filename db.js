@@ -1,13 +1,13 @@
 const sqlite3 = require('sqlite3').verbose();
 const fs = require('fs');
 
-let db = new sqlite3.Database('./db/todos.db', (err) => {
+let db = new sqlite3.Database('./todos.db', (err) => {
     if (err) {
         return console.error(err.message);
     }
 });
 
-if (!fs.existsSync('./db/todos.db')) {
+if (!fs.existsSync('./todos.db')) {
     db.serialize(() => {
         db.run('CREATE TABLE IF NOT EXISTS todos(id INTEGER PRIMARY KEY, description TEXT, deadline TEXT, percentage INTEGER)')
             //insert default values
