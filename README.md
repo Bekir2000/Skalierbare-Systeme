@@ -3,7 +3,7 @@
 ## Clone the Repository & cd into it
 
 ```shell
-git clone https://github.com/Bekir2000/Skalierbare-Systeme.git --branch testing-armin
+git clone https://github.com/Bekir2000/Skalierbare-Systeme.git
 cd Skalierbare-Systeme/
 ```
 
