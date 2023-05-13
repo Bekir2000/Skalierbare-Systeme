@@ -38,26 +38,7 @@
 
     <!-- content section -->
     <div id="app" class="container col-lg-6 my-3 border mx-auto">
-        <form @submit.prevent="addTodo()">
-            <div class="form-group">
-                <label for="task">Task</label>
-                <input type="text" class="form-control" maxlength="160" name="task" placeholder="Enter your task here" v-model="description"/>
-            </div>
-            <div class=" form-group">
-                <label for="deadline">Deadline</label>
-                <input type="text" class="form-control" pattern="(0[1-9]|[1-2][0-9]|3[0-1])\/(0[1-9]|1[0-2])\/\d{4}"
-                    name="deadline" placeholder="dd/mm/yyyy" v-model="deadline"/>
-            </div>
-            <div class="form-group">
-                <label for="percent">%</label>
-                <input type="text" pattern="[0-9]+" class="form-control" name="percent" placeholder="XX" v-model="percentage"/>
-            </div>
-
-            <div class="container text-center m-2">
-                <button type="submit" class="btn btn-primary">Save</button>
-            </div>
-
-        </form>
+        <new-form />
     </div>
 
 
@@ -79,7 +60,7 @@
 
 
 
-    <script src="script.js"></script>
+    <script type="module" src="./main.js"></script>
 
 </body>
 

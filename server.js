@@ -4,9 +4,12 @@ const express = require('express');
 const app = express();
 const PORT = 8004;
 
-app.use(express.static('./public'))
-app.use(express.urlencoded({ extended: false }))
-app.use(express.json())
+app.use(express.static('./public'));
+app.use(express.static('./src'));
+
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
 
 app.get('/api/todos', (req, res) => {
     db.getTodos((err, rows) => {
@@ -62,4 +65,4 @@ app.delete('/api/deletetodo/:id', (req, res) => {
         }
     });
 })
-app.listen(PORT, ()=> console.log(`listen on http://localhost:${PORT}`))
+app.listen(PORT, () => console.log(`listen on http://localhost:${PORT}`))
