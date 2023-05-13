@@ -30,19 +30,6 @@ let app = Vue.createApp({
                     console.log(error);
                 });
         },
-        addTodo() {
-            axios.post('/api/newtodo', {
-                description: this.description,
-                deadline: this.deadline,
-                percentage: this.percentage
-            })
-                .then(() => {
-                    window.location.href = '/index.html';
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        },
         editTodo(todoId) {
             window.location.href = `/edit.html?todoId=${todoId}`
         }
