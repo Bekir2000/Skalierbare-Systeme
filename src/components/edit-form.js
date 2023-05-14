@@ -7,8 +7,7 @@ export default {
             </div>
             <div class=" form-group">
                 <label for="deadline">Deadline</label>
-                <input type="text" class="form-control" pattern="(0[1-9]|[1-2][0-9]|3[0-1])/(0[1-9]|1[0-2])/\\d{4}"
-                    name="deadline" placeholder="dd/mm/yyyy" v-model="deadline"/>
+                <input type="text" class="form-control datepicker" name="deadline" placeholder="dd/mm/yyyy" v-model="deadline" data-provide="datepicker" readonly>
             </div>
             <div class="form-group">
                 <label for="percent">%</label>
@@ -42,6 +41,14 @@ export default {
                     console.log(error);
                 });
         }
+    },
+    mounted() {
+        $('.datepicker').datepicker({
+            format: 'dd/mm/yyyy',
+            autoclose: true
+        }).on('changeDate', (event) => {
+      this.deadline = event.target.value;
+    });
     },
     methods: {
         editTodo() {

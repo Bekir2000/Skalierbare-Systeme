@@ -46,7 +46,7 @@ function addTodo(description, deadline, percentage, callback) {
         if (err) {
             callback(err);
         } else {
-            callback(null, this.lastID) //TODO: return row and not just id
+            callback(null, this.lastID)
         }
     });
 }

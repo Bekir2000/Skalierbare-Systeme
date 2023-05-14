@@ -4,10 +4,9 @@ export default {
                 <label for="task">Task</label>
                 <input type="text" class="form-control" maxlength="160" name="task" placeholder="Enter your task here" v-model="description"/>
             </div>
-            <div class=" form-group">
+            <div class="form-group">
                 <label for="deadline">Deadline</label>
-                <input type="text" class="form-control" pattern="(0[1-9]|[1-2][0-9]|3[0-1])/(0[1-9]|1[0-2])/\\d{4}"
-                    name="deadline" placeholder="dd/mm/yyyy" v-model="deadline"/>
+                <input type="text" class="form-control datepicker" name="deadline" placeholder="dd/mm/yyyy" v-model="deadline" data-provide="datepicker" readonly>
             </div>
             <div class="form-group">
                 <label for="percent">%</label>
@@ -17,16 +16,22 @@ export default {
             <div class="container text-center m-2">
                 <button type="submit" class="btn btn-primary">Save</button>
             </div>
-
         </form>
 `,
-
     data() {
         return {
             description: '',
             deadline: '',
             percentage: '',
         }
+    },
+    mounted() {
+        $('.datepicker').datepicker({
+            format: 'dd/mm/yyyy',
+            autoclose: true
+        }).on('changeDate', (event) => {
+      this.deadline = event.target.value;
+    });
     },
     methods: {
         addTodo() {
@@ -41,6 +46,6 @@ export default {
                 .catch((error) => {
                     console.log(error);
                 });
-        },
+        }
     }
 }
