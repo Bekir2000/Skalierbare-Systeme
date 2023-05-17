@@ -1,43 +1,12 @@
-import editform from './components/edit-form.js'
-import newform from './components/new-form.js'
+import { createApp } from 'vue'
+import App from './App.vue'
+import router from './router'
+import 'bootstrap'
+import '../node_modules/bootstrap/dist/css/bootstrap.css'
+import '../node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.css'
+import 'bootstrap-datepicker'
+import './style.css'
 
-
-let app = Vue.createApp({
-    data: function() {
-        return {
-            todos: [], // initialize todos as an empty array
-            description: '',
-            deadline: '',
-            percentage: '',
-            editId: ''
-        }
-    },
-    created() {
-        axios.get('/api/todos')
-            .then((response) => {
-                this.todos = response.data;
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    },
-    methods: {
-        deleteTodo(todoId) {
-            axios.delete(`/api/deletetodo/${todoId}`)
-                .then(() => {
-                    this.todos = this.todos.filter((todo) => todo.id !== todoId)
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        },
-        editTodo(todoId) {
-            window.location.href = `/edit.html?todoId=${todoId}`
-        }
-    }
-});
-
-app.component('edit-form', editform)
-app.component('new-form', newform)
-
-app.mount('#app');
+const app = createApp(App)
+app.use(router)
+app.mount('#app')
