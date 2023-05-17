@@ -10,7 +10,8 @@ cd Skalierbare-Systeme/
 ## Install the Dependencies
 
 ```shell
-npm install
+npm install express
+npm install sqlite3
 ```
 
 ## Start the Server
