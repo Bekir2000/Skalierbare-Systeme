@@ -1,6 +1,7 @@
 const express = require('express');
 const session = require('express-session');
 const db = require('./db.js');
+const os = require('os');
 
 const app = express();
 const PORT = 8004;
@@ -119,4 +120,20 @@ app.delete('/api/deletetodo/:id', requireAuth, (req, res) => {
     });
 });
 
-app.listen(PORT, () => console.log(`listen on http://localhost:${PORT}`));
+app.listen(PORT, () => {
+    const interfaces = os.networkInterfaces();
+    let ipAddress = '';
+    
+    // Find the first non-internal IPv4 address
+    Object.keys(interfaces).forEach((iface) => {
+        interfaces[iface].forEach((details) => {
+            if (details.family === 'IPv4' && !details.internal) {
+                ipAddress = details.address;
+            }
+        });
+    });
+
+    console.log(`Server running on:
+    Local: http://localhost:${PORT}
+    Network: http://${ipAddress}:${PORT}`);
+});
