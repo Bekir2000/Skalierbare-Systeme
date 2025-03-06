@@ -2,7 +2,7 @@ export default {
     template: `<form @submit.prevent="addTodo()">
             <div class="form-group">
                 <label for="task">Task</label>
-                <input type="text" class="form-control" maxlength="160" name="task" placeholder="Enter your task here" v-model="description"/>
+                <input type="text" class="form-control" maxlength="160" name="task" placeholder="Enter your task here" v-model="description" required/>
             </div>
             <div class="form-group">
                 <label for="deadline">Deadline</label>
@@ -28,10 +28,13 @@ export default {
     mounted() {
         $('.datepicker').datepicker({
             format: 'dd/mm/yyyy',
-            autoclose: true
+            autoclose: true,
+            todayHighlight: true,
+            todayBtn: 'linked',
+            startDate: new Date()
         }).on('changeDate', (event) => {
-      this.deadline = event.target.value;
-    });
+            this.deadline = event.target.value;
+        });
     },
     methods: {
         addTodo() {

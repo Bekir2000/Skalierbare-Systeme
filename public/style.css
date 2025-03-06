@@ -19,3 +19,12 @@ body {
 .fade-leave-to {
   opacity: 0;
 }
+.datepicker table tr td.today {
+    background-color: #007bff !important;
+    color: white !important;
+    border-radius: 50%;
+}
+.datepicker table tr td.today:hover {
+    background-color: #0056b3 !important;
+    color: white !important;
+}

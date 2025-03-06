@@ -1,0 +1,10 @@
+.datepicker table tr td.today {
+    background-color: #0d6efd !important;
+    background-image: none !important;
+    color: white !important;
+}
+
+.datepicker table tr td.today:hover {
+    background-color: #0b5ed7 !important;
+    color: white !important;
+}

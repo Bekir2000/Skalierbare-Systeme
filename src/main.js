@@ -1,7 +1,6 @@
 import editform from './components/edit-form.js'
 import newform from './components/new-form.js'
 
-
 let app = Vue.createApp({
     data: function() {
         return {
@@ -9,16 +8,24 @@ let app = Vue.createApp({
             description: '',
             deadline: '',
             percentage: '',
-            editId: ''
+            editId: '',
+            isLoading: true // initialize loading state
         }
     },
     created() {
+        // Check if user is authenticated
         axios.get('/api/todos')
             .then((response) => {
                 this.todos = response.data;
+                this.isLoading = false; // set loading to false after data is loaded
             })
             .catch((error) => {
-                console.log(error);
+                this.isLoading = false; // set loading to false if there's an error
+                if (error.response && error.response.status === 401) {
+                    window.location.href = '/login.html';
+                } else {
+                    console.log(error);
+                }
             });
     },
     methods: {
@@ -28,11 +35,24 @@ let app = Vue.createApp({
                     this.todos = this.todos.filter((todo) => todo.id !== todoId)
                 })
                 .catch((error) => {
-                    console.log(error);
+                    if (error.response && error.response.status === 401) {
+                        window.location.href = '/login.html';
+                    } else {
+                        console.log(error);
+                    }
                 });
         },
         editTodo(todoId) {
             window.location.href = `/edit.html?todoId=${todoId}`
+        },
+        logout() {
+            axios.post('/api/logout')
+                .then(() => {
+                    window.location.href = '/login.html';
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         }
     }
 });
